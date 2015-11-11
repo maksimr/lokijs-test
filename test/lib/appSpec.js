@@ -4,10 +4,19 @@
 var db = new loki('myApp');
 
 
+db.User = function(user) {
+    return angular.extend({}, {
+        id: faker.random.uuid(),
+        name: faker.name.firstName,
+        avatar: faker.internet.avatar()
+    }, user);
+};
+
 db.Photo = function(photo) {
     return angular.extend({}, {
         id: faker.random.uuid(),
-        url: faker.image.imageUrl()
+        url: faker.image.imageUrl(),
+        author: db.User()
     }, photo);
 };
 
