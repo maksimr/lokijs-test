@@ -12,6 +12,7 @@
     "angular": "1.4.7",
     "angular-mocks": "1.4.7",
     "angular-resource": "1.4.7",
+    "faker": "3.0.1",
     "jasmine-core": "2.3.4",
     "karma": "0.13.15",
     "karma-jasmine": "0.3.6",

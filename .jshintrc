@@ -24,6 +24,7 @@
     "jasmine": false,
     "sinon": false,
     "loki": false,
+    "faker": false,
 
     "inject": false,
     "it": false,

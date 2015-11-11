@@ -4,6 +4,13 @@
 var db = new loki('myApp');
 
 
+db.Photo = function(photo) {
+    return angular.extend({}, {
+        id: faker.random.uuid(),
+        url: faker.image.imageUrl()
+    }, photo);
+};
+
 /**
  * Create tables in our database
  */
@@ -51,10 +58,13 @@ describe('appSpec', function() {
 
 
     beforeEach(function() {
-        this.photoCollectionMock = db.getCollection('photos').insert([{}, {}]);
+        this.photoCollectionMock = db.getCollection('photos').insert([
+            db.Photo(),
+            db.Photo()
+        ]);
 
         server.respondWith('GET', '/api/photos', JSON.stringify(this.photoCollectionMock));
-        server.respondWith('GET', /\/api\/photos\/(\d+)/, function(xhr, id) {
+        server.respondWith('GET', /\/api\/photos\/([\d-\w]+)/, function(xhr, id) {
             var photo = db.getCollection('photos').findOne({
                 id: id
             });
@@ -98,13 +108,10 @@ describe('appSpec', function() {
 
 
     it('should get photo by id', function() {
-        var photoId = '1';
-        var photoMock = db.getCollection('photos').insert({
-            id: photoId
-        });
+        var photoMock = db.getCollection('photos').insert(db.Photo());
 
         var photo = this.photosResource.get({
-            id: photoId
+            id: photoMock.id
         });
 
         server.flush();
@@ -117,7 +124,7 @@ describe('appSpec', function() {
     it('should return 404 if photo does not exist', function() {
         var callback = jasmine.createSpy('handlePhotoError');
         this.photosResource.get({
-            id: '1001'
+            id: faker.random.uuid()
         }).$promise.then(null, callback);
 
         server.flush();

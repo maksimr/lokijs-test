@@ -9,6 +9,7 @@ module.exports = function(config) {
             './node_modules/angular-resource/angular-resource.js',
             './node_modules/angular-mocks/angular-mocks.js',
             './node_modules/lokijs/src/lokijs.js',
+            './node_modules/faker/build/build/faker.js',
 
             'lib/*.js',
             'test/**/*Spec.js'
