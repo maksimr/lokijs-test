@@ -3,9 +3,10 @@
 
 module.exports = function(config) {
     config.set({
-        frameworks: ['jasmine', 'sinon'],
+        frameworks: ['phantomjs-shim', 'jasmine', 'sinon'],
         files: [
             './node_modules/angular/angular.js',
+            './node_modules/angular-resource/angular-resource.js',
             './node_modules/angular-mocks/angular-mocks.js',
             './node_modules/lokijs/src/lokijs.js',
 
